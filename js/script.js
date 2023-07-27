@@ -50,7 +50,8 @@ console.log('function generateTitleLinks has been done');
   titleList.innerHTML = '';
 
   /* [IN PROGRESS]for each article */
-
+  const articles = document.querySelectorAll('.post');
+  console.log(articles);
     /* get the article id */
 
     /* find the title element */
