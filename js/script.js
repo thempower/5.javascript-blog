@@ -3,9 +3,6 @@
 function titleClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
-
-
-
   /* [DONE] remove class 'active' from all article links  */
   /* [DONE]add class 'active' to the clicked link */
   /* [DONE] remove class 'active' from all articles */
