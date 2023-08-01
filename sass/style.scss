@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Source+Sans+Pro:300&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
 
 /* Variables */
 
@@ -10,6 +11,7 @@ $green-color: #02bf63;
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
 $font-text: 'Source Sans Pro', sans-serif;
+$font-h: 'Sedgwick Ave', cursive;
 
 /* Global */
 /* width */
@@ -34,6 +36,7 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
+  font-family: $font-h;
   color: $green-color;
   font-weight: bold;
   text-align: center;
@@ -48,6 +51,7 @@ ul li {
 span, p, a{
   color: $color-dark;
   text-decoration: none;
+
 }
 
 body {
@@ -69,7 +73,7 @@ body {
 .section-title {
   font-size: 22px;
   text-transform: uppercase;
-  font-family: $font-header;
+  font-family: $font-h;
   font-weight: 600;
   span {
     text-transform: none;
@@ -122,21 +126,43 @@ header {
     scale: 1.1;
   }
 
+  .git span {
+    display: none;
+  }
 
+  .container .title {
+    font-size: 3rem;
+    margin: 50px 0;
+
+  }
 
 .wrapper {
   display: flex;
   height: 600px;
-  margin-left: 10px;
+
 }
+
 
 .sidebar {
   flex: 1 0 0;
 }
+// .sidebar  a span {
+//  color:$color-dark;
+// }
+
+// .sidebar  a span:hover{
+//   color: $green-color;
+// }
+// .sidebar  a span:active {
+//   color: $green-color;
+//  }
+
 
 .posts {
+  position: relative;
   flex: 2 0 0;
   overflow-y: scroll;
+  min-height:600px;
 }
 
 .sidebar, .posts {
@@ -149,7 +175,6 @@ header {
   -moz-box-shadow: 0px 8px 29px -20px rgba(84, 84, 84, 1);
   box-shadow: 0px 8px 29px -20px rgba(84, 84, 84, 1);
 }
-
 
 
 /* Lists */
@@ -181,9 +206,18 @@ header {
 /* Post */
 
 .post {
-  display: none;
+  position: absolute;
+  padding: 36px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  z-index: 10;
+  transition: .5s all ease;
   &.active {
-    display: block;
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
   }
 }
 
@@ -197,3 +231,20 @@ header {
     margin: 0 10px 0 0;
   }
 }
+
+
+@media only screen and (max-width: 800px) {
+
+
+   .git {
+    position:fixed;
+    top: 40px;
+    right: 0;
+    z-index:1;
+   }
+
+   .wrapper {
+    flex-direction: column;
+
+   }
+  }

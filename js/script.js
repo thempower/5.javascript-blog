@@ -31,7 +31,6 @@ for (let activeArticle of activeArticles) {
    /*[DONE] get the article id */
    /*[DONE] find the title element */
    /*[DONE] get the title from the title element */
-   /*[DONE] get the title from the title element */
    /*[DONE] create HTML of the link */
    /*[DONE] insert link into titleList */
 
