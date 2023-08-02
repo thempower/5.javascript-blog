@@ -147,7 +147,7 @@ header {
   margin: 0;
   padding: 0;
 }
-.list .active {
+.list span.active {
   font-weight: bold;
   color: #02bf63;
 }

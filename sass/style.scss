@@ -183,7 +183,7 @@ header {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  .active {
+  span.active {
     font-weight: bold;
     color: $green-color;
   }
