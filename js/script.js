@@ -57,11 +57,9 @@ function generateTags(){
 //[DONE] find all articles */
   const articles = document.querySelectorAll('article');
   //[DONE] START LOOP: for every article: */
-  let html = '';
-  for( let article of articles) {
-
+  for(let article of articles) {
     //[DONE]  find tags wrapper */
-    const articleList = article.querySelector(optArticleTagsSelector);
+    const tagsWrapper = article.querySelector(optArticleTagsSelector);
     //[DONE] make html variable with empty string */
     let html = '';
     //   /* get tags from data-tags attribute */
@@ -73,11 +71,11 @@ function generateTags(){
       const tagHTML = '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
       //   /* add generated code to html variable */
       html =  html + tagHTML;
-      console.log(html);
       //   /* END LOOP: for each tag */
     }
     //   /* insert HTML of all the links into the tags wrapper */
-    articleList.innerHTML = html;
+    tagsWrapper.innerHTML = html;
+    console.log(html);
 
     //   /* END LOOP: for every article: */
   }
