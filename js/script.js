@@ -24,7 +24,9 @@ function titleClickHandler(event){
 // eslint-disable-next-line no-unused-vars
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
+  optTitleListSelector = '.titles',
+  optArticleTagsSelector = '.post-tags .list';
+
 /*[DONE] remove contents of titleList */
 /*[DONE]for each article */
 /*[DONE] get the article id */
@@ -52,21 +54,34 @@ function generateTitleLinks(){
 generateTitleLinks();
 
 function generateTags(){
-  /* find all articles */
-  const tags = document.querySelectorAll('data-tags');
-  console.log(tags);
-  /* START LOOP: for every article: */
-  /* find tags wrapper */
-  /* make html variable with empty string */
-  /* get tags from data-tags attribute */
-  /* split tags into array */
-  /* START LOOP: for each tag */
-  /* generate HTML of the link */
-  /* add generated code to html variable */
-  /* END LOOP: for each tag */
-  /* insert HTML of all the links into the tags wrapper */
+//[DONE] find all articles */
+  const articles = document.querySelectorAll('article');
+  //[DONE] START LOOP: for every article: */
+  let html = '';
+  for( let article of articles) {
 
-  /* END LOOP: for every article: */
+    //[DONE]  find tags wrapper */
+    const articleList = article.querySelector(optArticleTagsSelector);
+    //[DONE] make html variable with empty string */
+    let html = '';
+    //   /* get tags from data-tags attribute */
+    const articleTags = article.getAttribute('data-tags');
+    //   /* split tags into array */
+    const articleTagsArray = articleTags.split(' ');
+    for (let tag of articleTagsArray) {
+    //   /* generate HTML of the link */  }
+      const tagHTML = '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
+      //   /* add generated code to html variable */
+      html =  html + tagHTML;
+      console.log(html);
+      //   /* END LOOP: for each tag */
+    }
+    //   /* insert HTML of all the links into the tags wrapper */
+    articleList.innerHTML = html;
+
+    //   /* END LOOP: for every article: */
+  }
+
 }
 
 generateTags();
