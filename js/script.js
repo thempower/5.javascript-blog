@@ -29,7 +29,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorsSelector = '.post-author';
+  optArticleAuthorsSelector = '.post-author',
+  optTagsListSelector = '.tags.list';
 
 
 /*[DONE] remove contents of titleList */
@@ -70,24 +71,40 @@ generateTitleLinks();
 //[DONE]insert HTML of all the links into the tags wrapper */
 //[DONE]END LOOP: for every article: */
 function generateTags() {
-
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
   const articles = document.querySelectorAll('article');
 
   for(let article of articles) {
 
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
-    let html = '';
+    let linkHTML = '';
     const articleTags = article.getAttribute('data-tags');
     const articleTagsArray = articleTags.split(' ');
 
     for (let tag of articleTagsArray) {
 
       const tagHTML = '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
-      html =  html + tagHTML;
-      tagsWrapper.innerHTML = html;
+      linkHTML =  linkHTML + tagHTML;
+      if(allTags.indexOf(tagHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(tagHTML);
+      }
     }
+    tagsWrapper.innerHTML = linkHTML;
   }
+
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(optTagsListSelector);
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
+  console.log(allTags);
+
 }
+
+
+
+
 
 /*[DONE] prevent default action for this event */
 /*[DONE] make new constant named "clickedElement" and give it the value of "this" */
@@ -202,7 +219,7 @@ function authorClickHandler(event){
 /*[DONE] END LOOP: for each link */
 function addClickListenersToAuthors(){
   const links = document.querySelectorAll('a[href^="#author-"]');
-  console.log(links);
+
 
   for(let link of links) {
     link.addEventListener('click', authorClickHandler);
