@@ -86,9 +86,12 @@ function generateTags() {
 
       const tagHTML = '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
       linkHTML =  linkHTML + tagHTML;
-      if(allTags.indexOf(tagHTML) == -1){
-        /* [NEW] add generated code to allTags array */
-        allTags.push(tagHTML);
+      // [NEW] check if this link is not already in allTags
+      if(!allTags.hasOwnProperty(tag)){
+        // [NEW] add tag to allTags object
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
       }
     }
     tagsWrapper.innerHTML = linkHTML;
@@ -96,10 +99,16 @@ function generateTags() {
 
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(optTagsListSelector);
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
-  console.log(allTags);
 
+  let allTagsHTML = '';
+
+  for (let tag in allTags){
+    // allTagsHTML += '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
+    allTagsHTML += '<li><a href="#tag-'+ tag + '">'+ tag + ' (' + allTags[tag] + ') '+'</a>';
+    // allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  }
+
+  tagList.innerHTML = allTagsHTML;
 }
 
 
