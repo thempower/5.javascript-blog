@@ -1,3 +1,18 @@
+const opts = {
+  ArticleSelector : '.post',
+  TitleSelector : '.post-title',
+  TitleListSelector : '.titles',
+  ArticleTagsSelector : '.post-tags .list',
+  ArticleAuthorsSelector : '.post-author',
+  AuthorsListSelector : '.authors',
+  TagsListSelector : '.tags.list',
+  CloudClassCount : 5,
+  CloudClassPrefix : 'tag-size-',
+
+};
+
+
+
 /* [DONE] remove class 'active' from all article links  */
 /* [DONE]add class 'active' to the clicked link */
 /* [DONE] remove class 'active' from all articles */
@@ -25,15 +40,6 @@ function titleClickHandler(event){
 }
 
 // eslint-disable-next-line no-unused-vars
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorsSelector = '.post-author',
-  optAuthorsListSelector= '.authors',
-  optTagsListSelector = '.tags.list',
-  optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
 
 
 /*[DONE] remove contents of titleList */
@@ -44,13 +50,13 @@ const optArticleSelector = '.post',
 /*[DONE] create HTML of the link */
 /*[DONE] insert link into titleList */
 function generateTitleLinks(customSelector = ''){
-  const titleList = document.querySelector(optTitleListSelector);
+  const titleList = document.querySelector(opts.TitleListSelector);
   titleList.innerHTML = '';
-  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  const articles = document.querySelectorAll(opts.ArticleSelector + customSelector);
   let html = '';
   for( let article of articles) {
     const articleId = article.getAttribute('id');
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const articleTitle = article.querySelector(opts.TitleSelector).innerHTML;
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     html = html + linkHTML;
   }
@@ -98,8 +104,8 @@ function calculateTagClass(count, params) {
   const normalizedCount = count - params.min;
   const normalizedMax = params.max - params.min;
   const percentage = normalizedCount / normalizedMax;
-  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
-  return (optCloudClassPrefix + classNumber);
+  const classNumber = Math.floor( percentage * (opts.CloudClassCount - 1) + 1 );
+  return (opts.CloudClassPrefix + classNumber);
 }
 function generateTags() {
   /* [NEW] create a new variable allTags with an empty array */
@@ -108,7 +114,7 @@ function generateTags() {
 
   for(let article of articles) {
 
-    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    const tagsWrapper = article.querySelector(opts.ArticleTagsSelector);
     let linkHTML = '';
     const articleTags = article.getAttribute('data-tags');
     const articleTagsArray = articleTags.split(' ');
@@ -128,7 +134,7 @@ function generateTags() {
     tagsWrapper.innerHTML = linkHTML;
   }
 
-  const tagList = document.querySelector(optTagsListSelector);
+  const tagList = document.querySelector(opts.TagsListSelector);
   let allTagsHtml = '';
   const tagsParams = calculateTagsParams(allTags);
 
@@ -200,8 +206,9 @@ function addClickListenersToTags(){
 // [DONE] Insert html link in to author wrapper
 // [DONE] End of loop
 function generateAuthors(){
-  const articles = document.querySelectorAll(optArticleSelector);
-  const authorsList = document.querySelector(optAuthorsListSelector);
+  const articles = document.querySelectorAll(opts.ArticleSelector);
+  const authorsList = document.querySelector(opts.AuthorsListSelector);
+  console.log(authorsList);
   authorsList.innerHTML = '';
 
   let allAuthorsHtml = '';
@@ -209,9 +216,9 @@ function generateAuthors(){
   let allAuthors = {};
 
   for (let article of articles) {
-    const authorWrapper = article.querySelector(optArticleAuthorsSelector);
+    const authorWrapper = article.querySelector(opts.ArticleAuthorsSelector);
     authorWrapper.innerHTML = '';
-    const articleAuthor = article.getAttribute("data-author");
+    const articleAuthor = article.getAttribute('data-author');
     const linkHtml = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
     authorWrapper.innerHTML = linkHtml;
 
