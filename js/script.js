@@ -30,7 +30,9 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorsSelector = '.post-author',
-  optTagsListSelector = '.tags.list';
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 
 /*[DONE] remove contents of titleList */
@@ -70,6 +72,34 @@ generateTitleLinks();
 //[DONE] END LOOP: for each tag */
 //[DONE]insert HTML of all the links into the tags wrapper */
 //[DONE]END LOOP: for every article: */
+function calculateTagsParams(tags) {
+  const params = {max: 0, min: 999999};
+
+  for (let tag in tags) {
+
+    if (tags[tag] > params.max) {
+      params.max = tags[tag];
+    }
+
+    if (tags[tag] < params.min) {
+      params.min = tags[tag];
+    }
+  }
+
+  return params;
+}
+
+
+/**
+ *
+ */
+function calculateTagClass(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  return (optCloudClassPrefix + classNumber);
+}
 function generateTags() {
   /* [NEW] create a new variable allTags with an empty array */
   let allTags = [];
@@ -97,19 +127,20 @@ function generateTags() {
     tagsWrapper.innerHTML = linkHTML;
   }
 
-  /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(optTagsListSelector);
+  let allTagsHtml = '';
+  const tagsParams = calculateTagsParams(allTags);
 
-  let allTagsHTML = '';
-
-  for (let tag in allTags){
-    // allTagsHTML += '<li><a href="#tag-'+ tag + '">'+ tag +'</a>';
-    allTagsHTML += '<li><a href="#tag-'+ tag + '">'+ tag + ' (' + allTags[tag] + ') '+'</a>';
-    // allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  for (let singleTag in allTags) {
+    const tagLinkHtml = '<li><a href="#tag-' + singleTag + '" class="' + calculateTagClass(allTags[singleTag], tagsParams) + '">' + singleTag + '</a></li>';
+    allTagsHtml += tagLinkHtml;
   }
 
-  tagList.innerHTML = allTagsHTML;
+  tagList.innerHTML = allTagsHtml;
 }
+
+
+
 
 
 
