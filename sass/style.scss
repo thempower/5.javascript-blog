@@ -276,6 +276,20 @@ header {
   color: goldenrod;
 }
 
+.authors {
+
+  li {
+    padding: 0px;
+    margin: 0px;
+  }
+
+
+ span {
+
+  color: $color-dark;
+
+}
+}
 @media only screen and (max-width: 800px) {
 
 
